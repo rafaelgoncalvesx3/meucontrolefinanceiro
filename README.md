@@ -46,13 +46,8 @@ O primeiro acesso cria Carteira e categorias padrão, sem lançamentos fictício
 9. Confira teclado, rolagem e legibilidade em uma tela pequena.
 Esse roteiro é de verificação manual; testes no aparelho devem ser feitos antes da apresentação.
 
-## Entrega no GitHub
-Crie o repositório da dupla com “Use this template” na página do professor. Copie os arquivos deste projeto, incluindo package-lock.json, sem node_modules nem a pasta .git. Faça commits reais conforme estudar, testar e modificar o projeto. Não invente histórico de desenvolvimento. Publique e informe o link na documentação, garantindo acesso ao professor.
-Turma, professor e URL do repositório estão pendentes na documentação. O e-mail não foi enviado.
-
 ## Módulo DRE
 Filtro por mês AAAA-MM. Receitas brutas - deduções = receita líquida; menos custos = resultado bruto; menos despesas operacionais = resultado operacional; menos outras despesas = resultado do período. Margem = resultado / receita líquida, quando positiva. Saldo inicial fica fora da DRE. Classifique categorias de despesa na tela Categorias; a classificação recalcula inclusive períodos anteriores. Trata-se de DRE gerencial simplificada, pelo mês da data do lançamento, sem escrituração contábil ou regime de competência separado.
 Teste: no mesmo mês, registre receita 1.000,00; dedução 100,00; custo 200,00; despesa operacional 150,00; outras 50,00. Esperado: líquida 900,00; bruto 700,00; operacional 550,00; resultado 500,00; margem 55,6%. Em outro mês, esses valores não devem aparecer.
 
-## Verificações realizadas
-TypeScript e exportação web Expo passaram; 12 verificações de regras financeiras e DRE passaram. Testes manuais no celular estão pendentes. A instalação apontou 32 alertas de dependências (7 moderados e 25 altos); requerem análise antes de uso em produção.
+
