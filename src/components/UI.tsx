@@ -1,0 +1,10 @@
+import React from 'react';
+import {View,Text,TextInput,Pressable,ScrollView,KeyboardAvoidingView,Platform,TextInputProps} from 'react-native';
+import {s,colors} from '../styles/theme';
+import {Transaction} from '../types';
+import {money} from '../services/finance';
+export function Button({title,onPress,danger=false,disabled=false}:{title:string;onPress:()=>void;danger?:boolean;disabled?:boolean}) {return <Pressable accessibilityRole="button" disabled={disabled} onPress={onPress} style={[s.button,danger&&{backgroundColor:colors.danger},disabled&&{opacity:0.5}]}><Text style={s.buttonText}>{title}</Text></Pressable>;}
+export function Field({label,...props}:TextInputProps&{label:string}) {return <View style={{gap:6}}><Text style={s.label}>{label}</Text><TextInput accessibilityLabel={label} {...props} style={s.input}/></View>;}
+export function Page({title,children}:{title:string;children:React.ReactNode}) {return <KeyboardAvoidingView style={s.page} behavior={Platform.OS==='ios'?'padding':undefined}><ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}><Text style={s.title}>{title}</Text>{children}</ScrollView></KeyboardAvoidingView>;}
+export function Choice({items,value,onChange}:{items:{id:string;nome:string}[];value:string;onChange:(id:string)=>void}) {return <View style={s.row}>{items.map(i=><Pressable accessibilityRole="button" accessibilityState={{selected:i.id===value}} key={i.id} onPress={()=>onChange(i.id)} style={[s.chip,i.id===value&&{backgroundColor:colors.primary}]}><Text style={[s.chipText,i.id===value&&{color:'#fff'}]}>{i.nome}</Text></Pressable>)}</View>;}
+export function TransactionRow({item,onPress}:{item:Transaction;onPress:()=>void}) {return <Pressable accessibilityRole="button" onPress={onPress} style={s.card}><Text style={s.text}>{item.descricao}</Text><View style={[s.row,{justifyContent:'space-between'}]}><Text style={s.label}>{item.data.split('-').reverse().join('/')}</Text><Text style={[s.text,{fontWeight:'700',color:item.tipo==='receita'?colors.primary:colors.danger}]}>{item.tipo==='receita'?'+':'-'} {money(item.valor)}</Text></View></Pressable>;}

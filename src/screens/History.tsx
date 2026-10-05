@@ -1,0 +1,6 @@
+import React,{useState} from 'react';
+import {View,Text,FlatList} from 'react-native';
+import {Button,Field,Choice,TransactionRow} from '../components/UI';
+import {useFinance} from '../storage/FinanceContext';
+import {s} from '../styles/theme';
+export default function History({navigation}:any){const {db}=useFinance();const [type,setType]=useState('todos'),[q,setQ]=useState('');const list=db.lancamentos.filter(t=>(type==='todos'||t.tipo===type)&&t.descricao.toLowerCase().includes(q.toLowerCase())).sort((a,b)=>b.data.localeCompare(a.data));return <View style={s.page}><FlatList data={list} keyExtractor={t=>t.id} contentContainerStyle={s.content} ListHeaderComponent={<View style={{gap:16}}><Text style={s.title}>Histórico</Text><Field label="Buscar descrição" value={q} onChangeText={setQ}/><Choice value={type} onChange={setType} items={[{id:'todos',nome:'Todos'},{id:'receita',nome:'Receitas'},{id:'despesa',nome:'Despesas'}]}/><Button title="+ Novo lançamento" onPress={()=>navigation.navigate('Form')}/></View>} renderItem={({item})=><TransactionRow item={item} onPress={()=>navigation.navigate('Details',{id:item.id})}/>} ListEmptyComponent={<Text style={s.empty}>Nenhum lançamento encontrado.</Text>}/></View>;}
